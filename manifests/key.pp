@@ -26,12 +26,14 @@ define apt::key (
         unless  => "apt-key list | grep -Fe '${name}' | grep -Fvqe 'expired:'",
         before  => Exec['apt-get_update'],
         notify  => Exec['apt-get_update'],
+        path    => ['/usr/local/bin', '/usr/bin', '/bin'],
       }
     }
 
     absent: {
       exec {"apt-key del ${name}":
         onlyif => "apt-key list | grep -Fqe '${name}'",
+        path   => ['/usr/local/bin', '/usr/bin', '/bin'],
       }
     }
 

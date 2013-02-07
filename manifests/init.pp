@@ -45,6 +45,7 @@ class apt {
   exec {'apt-get_update':
     command     => 'apt-get update',
     refreshonly => true,
+    path        => ['/usr/local/bin', '/usr/bin', '/bin'],
   }
 
   # apt support preferences.d since version >= 0.7.22
